@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple TO-DO List</title>
+</head>
+<body>
+    <h1>My To-do List</h1>
+    <form action="#" th:action="@{/item/list}" th:object="${todoitem}" method="post">
+        <label for="todocontent">Task:</label>
+        <input type="text" th:field="*{content}" id="todocontent" 
+            placeholder="Please enter a task" required>
+        <input type="submit" value="Add item">
+    </form>
+    <br>
+    <td th:switch="${#lists.isEmpty(list)}">
+        <p th:case="true">You do not have any items yet</p>
+        <table th:case="false">
+            <tr data-th-each="item, iter: ${list}">
+                <td data-th-text="${iter.index + 1}"></td>
+                <td data-th-texT="${item.content}"></td>
+            </tr>
+        </table>
+    </td>
+    <br>
+    <form action="#" th:action="@{/item/database}" method="post">
+        <button name="saveitem">Save this list!</button>
+    </form>
+</body>
+</html>
