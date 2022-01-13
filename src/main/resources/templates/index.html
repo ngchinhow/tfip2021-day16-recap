@@ -5,28 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple TO-DO List</title>
+    <link rel="stylesheet" href="/bootstrap.min.css">
 </head>
 <body>
-    <h1>My To-do List</h1>
-    <form action="#" th:action="@{/item/list}" th:object="${todoitem}" method="post">
-        <label for="todocontent">Task:</label>
-        <input type="text" th:field="*{content}" id="todocontent" 
-            placeholder="Please enter a task" required>
-        <input type="submit" value="Add item">
-    </form>
-    <br>
-    <td th:switch="${#lists.isEmpty(list)}">
-        <p th:case="true">You do not have any items yet</p>
-        <table th:case="false">
-            <tr data-th-each="item, iter: ${list}">
-                <td data-th-text="${iter.index + 1}"></td>
-                <td data-th-texT="${item.content}"></td>
-            </tr>
-        </table>
-    </td>
-    <br>
-    <form action="#" th:action="@{/item/database}" method="post">
-        <button name="saveitem">Save this list!</button>
-    </form>
+    <div class="container">
+        <div class="row mt-4">
+            <div class="column">
+                <h1>My To-do List</h1>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="column">
+                <form action="#" th:action="@{/item/list}" th:object="${todoitem}"
+                    method="post">
+                    <div class="mb-2">
+                        <label for="todocontent" class="form-label">Task:</label>
+                        <input type="text" th:field="*{content}" id="todocontent" 
+                        placeholder="Please enter a task" required class="form-control">
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" name="additem" 
+                        class="btn-primary">Add item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <td th:switch="${#lists.isEmpty(list)}">
+            <p th:case="true">You do not have any items yet</p>
+            <table th:case="false">
+                <tr data-th-each="item, iter: ${list}">
+                    <td data-th-text="${iter.index + 1}"></td>
+                    <td data-th-texT="${item.content}"></td>
+                </tr>
+            </table>
+        </td>
+        <form action="#" th:action="@{/item/database}" method="post">
+            <button name="saveitem">Save this list!</button>
+        </form>
+    </div>
 </body>
 </html>
